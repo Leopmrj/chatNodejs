@@ -1,0 +1,33 @@
+import { Entity, Column, CreateDateColumn, UpdateDateColumn, PrimaryColumn } from "typeorm";
+
+import { v4 as uuidV4 } from "uuid";
+
+@Entity("settings")
+class Setting {
+
+	@PrimaryColumn()
+	id: string;
+
+	@Column()
+	username: string;
+
+	@Column()
+	chat: boolean;
+
+	@UpdateDateColumn()
+	updated_at: Date;
+
+	@CreateDateColumn()
+	created_at: Date;
+
+	// Se não vier (insert) ele é preenchido como o próximo id
+	// Se vier (update) não faz nada.
+	constructor() {
+		if (!this.id) {
+			this.id = uuidV4();
+		}
+	}
+
+}
+
+export { Setting };
